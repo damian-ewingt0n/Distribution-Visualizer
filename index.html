@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.0.1/math.min.js'></script>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="range-slider-master/css/rSlider.min.css">
+    <link rel="stylesheet" href="noUiSlider-14.6.0/distribute/nouislider.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
+    <title>Probability Distibution Visualizer</title>
+</head>
+<body>
+    <div class='menu-ctn'>
+        <h1 class='main'>Probability Distribution Visualizer</h1>
+        <nav>
+            <ul>
+                <li class='menus' id='menu1'>
+                    <p class='dist'> Discrete</p> 
+                    <ul class='dropdown' id='dd1'>
+                        <div class='bar'></div>
+                        <li id='Binom'>Binomial</li>
+                        <li id='Geom'>Geometric</li>
+                        <li id='NegBinom'>Negative Binomial</li>
+                        <li id='Poisson'>Poisson</li>
+                        <li id='Hyper'>Hyper Geometric</li>
+                    </ul>
+                </li>
+                <li class='menus' id='menu2'>
+                    <p class='dist'>Continuous</p> 
+                    <ul class='dropdown' id='dd2'>
+                        <div class='bar'></div>
+                        <li id='Norm'>Normal</li>
+                        <li id='Uni'>Uniform</li>
+                        <li id='Exp'>Exponential</li>
+                        <li id='Gamma'>Gamma</li>
+                        <li id='Log-Norm'>Log-Normal</li>
+                        <li id='Beta'>Beta</li>
+                    </ul>
+                </li>
+                <p class='tag'> Choose a Distribution <br> to Visualize</p>
+            </ul>
+        </nav>
+    </div>
+    <div class='grid-cont'>
+        <div class='top-row'>
+            <div class='left-box'>
+                <canvas id='mychart'>
+
+                </canvas>       
+                
+            </div>
+
+            <div id='right-box'>
+                <h2 id='title'>
+                    Normal Distribution
+                </h2>
+                <p id='distributed'>
+                   $$ {X \sim N(\mu, \sigma^2)} $$
+                </p>
+                <hr>
+                <p id='equation'>
+                    PDF: $$ {f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left[ \frac{x - \mu}{\sigma}\right]^2} } $$
+                </p>
+                <p id='lim'> $$ { -\infty < x < \infty} $$ </p>
+                <hr>
+                <ul class='metrics'>
+                    <li class='E' id='Expect'>E[X] = 0.00</li>
+                    <li class='V' id='Var'>Var(X) = 1.00</li>
+                </ul>
+            </div>
+        </div>
+        <div id='bottom-row'>
+            <h3>Parameters</h3>
+            <div class='slide-container'>
+                <div class='p' id='p1'>
+                     <div class='wrapper text1'><p id='par_name1'>&#956: </p></div>
+                     <div class='wrapper s' id='two_thumb1'></div>
+                     <div class='wrapper text2'><p id='output1'>&#956 = ?</p></div>
+                </div>
+                <div class='p' id='p2'>
+                    <div class='wrapper text1'><p id='par_name2'>&#963: </p></div>
+                    <div class='wrapper s' id='two_thumb2'></div>
+                    <div class='wrapper text2'><p id='output2'>&#963 = ?</p></div>
+               </div>
+                <div class='p' id='p3'>
+                    <div class='wrapper text1'><p id='par_name3'>#: </p></div>
+                    <div class='wrapper s' id='two_thumb3'></div>
+                    <div class='wrapper text2'><p id='output3'># = ?</p></div>
+                </div>
+                <div class='p' id='p4'>
+                    <div class='wrapper text1'><p id='par_name4'>#: </p></div>
+                    <div class='wrapper s' id='two_thumb4'></div>
+                    <div class='wrapper text2'><p id='output4'># = ?</p></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src='/range-slider-master/js/rSlider.min.js'></script>
+    <script src='/noUiSlider-14.6.0/distribute/nouislider.min.js'></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src='main.js'></script>
+</body>
+</html>

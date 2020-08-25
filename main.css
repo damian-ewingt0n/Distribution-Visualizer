@@ -1,0 +1,309 @@
+body {
+    margin:0;
+    background-color: lightseagreen;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.main {
+    float: left;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 25px;
+    margin-left: 30px;
+    color: white;
+}
+
+nav {
+    float: right;
+    margin-right: 10px;
+    padding: 0;
+    height: 70px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+.menus {
+    list-style-type: none;
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+    color: white;
+    font-family: sans-serif;
+    border-radius: 20px;
+    position: relative;
+    
+}
+
+.menu-ctn {
+    background-color:black;
+}
+
+.menu-ctn::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+  .dist:after {  
+    content: '';   
+    position: absolute;   
+    border: 7px solid transparent; 
+    /* This will set the direction of the arrow.*/  
+     border-top: 7px solid white; 
+       top: 33px; 
+    margin-left: 8px; 
+
+}
+
+.dist:hover {
+    cursor: pointer;
+    background-color: cadetblue;
+    transition: all 0.4s ease;
+}
+
+.dist {
+    padding: 10px;
+    padding-left: 10px;
+    padding-right: 40px;
+    border-radius:10px;
+    font-size: 15px;
+    
+}
+
+
+.tag {
+    list-style-type: none;
+    margin-left: 20px;
+    padding: 10px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 15px;
+    float: right;
+    border-radius: 10px;
+    background-color: gray;
+    margin-top: 7px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.dropdown {
+    display:none;
+    position: absolute;
+    width: 100%;
+    background-color: black;
+    z-index: 1;
+    text-align: center;
+    left: 0;
+    top: 60px;
+}
+
+.dropdown li {
+    padding: 5px 0px;
+    margin: 15px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.dropdown li:hover {
+    color: lightseagreen;
+}
+
+#dd1.active {
+    display:block;
+}
+
+#dd2.active {
+    display:block;
+}
+
+.bar {
+    width: 100%;
+    height: 5px;
+    background-color: white;
+}
+
+.grid-cont {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.top-row {
+    width: 100%;
+    height: 400px;
+    margin-top: 5px;
+}
+
+#right-box {
+    float: left;
+    padding: 10px 20px;
+    width: 300px;
+    margin-right: 0;
+    background-color: white;
+    margin-top: 10px;
+    height: 100%;
+    border-radius: 30px;
+    max-width: 350px;
+    transform: translate(0px,0px);
+}
+
+h2 {
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+.left-box {
+    background-color: white;
+    padding: 10px 1%;
+    height: 100%;
+    width: 60%;
+    float: left;
+    border-radius: 30px;
+    margin-left:1%;
+    margin-top: 10px;
+}
+
+.metrics {
+    margin-left: 0;
+    width: 100%;
+    height: 100px;
+    padding: 0;
+    padding-top: 0px;
+}
+
+.metrics li {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 22px;
+    padding-left:10px;
+}
+
+#bottom-row {
+    width: 95%;
+    height: 200px;
+    background-color: white;
+    margin: 25px 1%;
+    border-radius: 20px;
+    float: left;
+    max-width:1000px;
+}
+
+.slide-container {
+    margin: 10px 30px;
+    width: 50%;
+}
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 10px; /* Specified height */
+    border-radius: 10px;
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    margin: 20px 0;
+
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 15px; /* Set a specific slider handle width */
+    height: 15px; /* Slider handle height */
+    border-radius: 10px;
+    background:black; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 15px; /* Set a specific slider handle width */
+    height: 15px; /* Slider handle height */
+    border-radius: 10px;
+    background: black; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+
+  h3 {
+      font-family: 'Titillium Web', sans-serif;
+      font-size: 25px;
+      margin-left: 20px;
+      margin: 10px 30px
+  }
+
+  @media only screen and (max-width: 950px) {
+    #right-box {
+        display: none;
+    }
+    .left-box {
+        width: 93%
+    }
+  }
+
+.slide-container {
+    height: 200px;
+    width: 100%;
+}
+
+.wrapper {
+    float: left;
+}
+
+.wrapper.s {
+    width: 50%;
+    margin: 12px;
+}
+
+.wrapper.text1 {
+    font-size: 30px;
+    height: 30px;
+}
+
+.p {
+    width: 100%;
+    float: left;
+}
+
+#p1 {
+    display: block;
+}
+
+#p2 {
+    display: block;
+}
+
+#p3 {
+    display: none;
+}
+
+#p4 {
+    display: none;
+}
+
+.wrapper p {
+    margin: 5px 20px;
+}
+.wrapper.text2 {
+    font-size: 30px;
+    height: 30px;
+}
+
+#equation {
+    font-size: 20px;
+    display: block;
+}
