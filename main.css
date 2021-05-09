@@ -185,7 +185,7 @@ h2 {
     padding-left:10px;
 }
 
-#parameter {
+#bottom-row {
     width: 95%;
     height: 200px;
     background-color: white;
@@ -265,7 +265,7 @@ h2 {
 }
 
 .wrapper.s {
-    width: 40%;
+    width: 50%;
     margin: 12px;
 }
 

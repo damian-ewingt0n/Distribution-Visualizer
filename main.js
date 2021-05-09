@@ -132,10 +132,8 @@ let DistChart = new Chart (mychart, {
                         }
                     }
                 }
-            }],
-        },
-        tooltips: {
-            enabled: false
+            }]
+            
         },
         maintainAspectRatio: false,
         animation: false,
@@ -145,20 +143,13 @@ let DistChart = new Chart (mychart, {
             }
         },
         legend: false
-        },
+    }
     
 })
 
 two_thumb1.noUiSlider.on('slide', function() {
     output1.innerHTML = list_of_symb[0] + ' = '  + two_thumb1.noUiSlider.get()
     list_of_par[0] = parseFloat(two_thumb1.noUiSlider.get())
-    let MV = mean_var_calc(list_of_par, page)
-    if (typeof(MV[0]) == 'number') {
-        MV[0] = MV[0].toFixed(2)
-    }
-    if (typeof(MV[1]) == 'number') {
-        MV[1] = MV[1].toFixed(2)
-    }
 
     if (page == 'Binom') {
         arr = [];
@@ -172,8 +163,6 @@ two_thumb1.noUiSlider.on('slide', function() {
         arr2.push(dist_func(arr[i], list_of_par, page))
     }
     DistChart.data.datasets[0].data = arr2
-    Expect.innerHTML = 'E[X] = ' + MV[0]
-    Var.innerHTML = 'Var(X) = ' + MV[1]
 
     DistChart.update()
 })
@@ -181,21 +170,12 @@ two_thumb1.noUiSlider.on('slide', function() {
 two_thumb2.noUiSlider.on('slide', function () {
     output2.innerHTML = list_of_symb[1] + ' = '  + two_thumb2.noUiSlider.get()
     list_of_par[1] = parseFloat(two_thumb2.noUiSlider.get())
-    let MV = mean_var_calc(list_of_par, page)
-    if (typeof(MV[0]) == 'number') {
-        MV[0] = MV[0].toFixed(2)
-    }
-    if (typeof(MV[1]) == 'number') {
-        MV[1] = MV[1].toFixed(2)
-    }
 
     arr2 = []
     for (let i = 0; i<arr.length; i++) {
         arr2.push(dist_func(arr[i], list_of_par, page))
     }
     DistChart.data.datasets[0].data = arr2;
-    Expect.innerHTML = 'E[X] = ' + MV[0]
-    Var.innerHTML = 'Var(X) = ' + MV[1]
 
     DistChart.update()
 })
@@ -203,21 +183,12 @@ two_thumb2.noUiSlider.on('slide', function () {
 two_thumb3.noUiSlider.on('slide', function () {
     output3.innerHTML = list_of_symb[2] + ' = '  + two_thumb3.noUiSlider.get()
     list_of_par[2] = parseFloat(two_thumb3.noUiSlider.get())
-    let MV = mean_var_calc(list_of_par, page)
-    if (typeof(MV[0]) == 'number') {
-        MV[0] = MV[0].toFixed(2)
-    }
-    if (typeof(MV[1]) == 'number') {
-        MV[1] = MV[1].toFixed(2)
-    }
 
     arr2 = []
     for (let i = 0; i<arr.length; i++) {
         arr2.push(dist_func(arr[i], list_of_par, page))
     }
     DistChart.data.datasets[0].data = arr2;
-    Expect.innerHTML = 'E[X] = ' + MV[0]
-    Var.innerHTML = 'Var(X) = ' + MV[1]
 
     DistChart.update()
 })
@@ -225,21 +196,12 @@ two_thumb3.noUiSlider.on('slide', function () {
 two_thumb4.noUiSlider.on('slide', function () {
     output4.innerHTML = list_of_symb[3] + '= ( '  + two_thumb4.noUiSlider.get()[0] + ', ' + two_thumb4.noUiSlider.get()[1] + ')';
     list_of_par[3] = [parseFloat(two_thumb4.noUiSlider.get()[0]), parseFloat(two_thumb4.noUiSlider.get()[1])];
-    let MV = mean_var_calc(list_of_par, page)
-    if (typeof(MV[0]) == 'number') {
-        MV[0] = MV[0].toFixed(2)
-    }
-    if (typeof(MV[1]) == 'number') {
-        MV[1] = MV[1].toFixed(2)
-    }
 
     arr2 = []
     for (let i = 0; i<arr.length; i++) {
         arr2.push(dist_func(arr[i], list_of_par, page))
     }
     DistChart.data.datasets[0].data = arr2;
-    Expect.innerHTML = 'E[X] = ' + MV[0]
-    Var.innerHTML = 'Var(X) = ' + MV[1]
 
     DistChart.update()
 })
@@ -289,61 +251,8 @@ function dist_func (x, par, what_page) {
         return math.pow(par[1], par[0]) * math.pow(x, par[0] - 1) * math.exp(-par[1] * x) / math.gamma(par[0])
     } else if (what_page == 'Beta') {
         return math.gamma(par[0] + par[1]) / (math.gamma(par[0]) * math.gamma(par[1])) * math.pow(x, par[0] - 1) * math.pow(1-x, par[1]-1)
-    }
-}
-
-function mean_var_calc(par, what_page) {
-    if (what_page == 'Norm') {
-        return [
-            par[0], 
-            math.pow(par[1],2)
-        ]
-    } else if (what_page == 'Exp') {
-        return [
-            1 / par[0],
-            1 / math.pow(par[0],2)
-        ]
-    } else if (what_page == 'Log-Norm') {
-        return [
-            math.exp(par[0] + 1/2 * par[1]), 
-            math.exp(2*par[0] + par[1]) * (math.exp(par[1]) - 1)
-        ]
-    } else if (what_page == 'Uni') {
-        if (par[3][0] != par[3][1]) {
-            return [
-                (par[3][1] + par[3][0]) / 2,
-                math.pow(par[3][1] - par[3][0],2) / 12
-            ]
-        } else {
-            return ['Undef', 'Undef']
-        }
-    } else if (what_page == 'Binom') {
-        return [
-            par[0] * par[1], 
-            par[0] * par[1] * (1 - par[1])
-        ]
-    } else if (what_page == 'Geom') {
-        return [
-            1 / par[0],
-            (1 - par[0]) / math.pow(par[0], 2)
-        ]
-    } else if (what_page == 'Poisson') {
-        return [
-            par[0],
-            par[0]
-        ]
-    } else if (what_page == 'Hyper') {
-        if (Math.min(par[1], par[2]) < math.max(par[2] + par[1] - par[0],0)) {
-            return ['Undef', 'Undef']
-        } else {
-            return [par[2]*par[1]/par[0], (par[2]*par[1]/par[0])*((par[0]-par[1])/par[0])*(par[0]-par[2])/(par[0]-1) ]
-        } 
-    } else if (what_page == 'NegBinom') {
-        return [par[0]/par[1], par[0]*(1-par[1])/math.pow(par[1],2)]
-    } else if (what_page == 'Gamma') {
-        return [par[0]/par[1], par[0]/math.pow(par[1],2)]
-    } else if (what_page == 'Beta') {
-        return [par[0]/(par[0]+par[1]), (par[0]*par[1])/(math.pow(par[0]+par[1],2)*(par[0]+par[1]+1))]
+    } else if (what_page == 'Chi') {
+        return math.pow(x, par[0]/2 -1) * math.exp(-x/2) / (math.pow(2, par[0]/2) * math.gamma(par[0]/2))
     }
 }
 
@@ -387,7 +296,7 @@ function info(what_page) {
     } else if (what_page == 'Binom') {
         return ['Binomial Distribution', 'X \\sim Binom( n, p)', 'P(X = x) = {n \\choose x} p^x (1-p)^{n-x}', 'x = 0, 1, 2, ..., n']
     } else if (what_page == 'Geom') {
-        return ['Geometric Distribution', 'X \\sim Geom( p )', 'P(X = x) = p(1-p)^{x-1}', 'x = 1, 2, ,3, ...']
+        return ['Geometric Distribution', 'X \\sim Geom( p )', 'P(X = x) = p(1-p)^{x-1}', 'x = 1, 2, 3, ...']
     } else if (what_page == 'Poisson') {
         return ['Poisson Distribution', 'X \\sim Possion( \\lambda )', 'P(X = x) = \\frac{e^{-\\lambda}(\\lambda)^x}{x!}', 'x = 0, 1, 2, 3, ...']
     } else if (what_page == 'Hyper') {
@@ -398,7 +307,9 @@ function info(what_page) {
         return ['Gamma Distribution', 'X \\sim Gamma( \\alpha, \\beta)', ' f(x) = \\frac{x^{\\alpha - 1} e^{-\\frac{x}{\\beta}}}{\\Gamma(\\alpha) \\beta^{\\alpha}} ', '0 < x < \\infty']
     } else if (what_page == 'Beta') {
         return ['Beta Distribution', 'X \\sim Beta( \\alpha, \\beta)', 'f(x) = \\frac{\\Gamma(\\alpha + \\beta)}{\\Gamma(\\alpha)\\Gamma(\\beta)} x^{\\alpha - 1}(1-x)^{\\beta - 1}', '0 < x < 1']
-    }  
+    } else if (what_page == 'Chi') {
+        return ['Chi-Square Distribution', 'X \\sim &#967(k)', 'f(x) = \\frac{x^{\\frac{k}{2} - 1} e^{-\\frac{x}{2}}}{2^{\\frac{k}{2}} \\Gamma(\\frac{k}{2})}', '0 < x < \\infty']
+    }
 }
 
 function symbol_grab(what_page) {
@@ -421,10 +332,12 @@ function symbol_grab(what_page) {
     } else if (what_page == 'NegBinom') {
         return ['k', 'p', '#', '( #, #)']
     } else if (what_page == 'Gamma') {
-        return ['&#945', '&#955', '#', '( #, #)']
+        return ['&#945', '&#946', '#', '( #, #)']
     } else if (what_page == 'Beta') {
         return ['&#945', '&#946', '#', '( #, #)']
-    }  
+    } else if (what_page == 'Chi') {
+        return ['k', '#', '#', '( #, #)']
+    }
 }
 
 function par_range_grab(what_page) {
@@ -445,12 +358,14 @@ function par_range_grab(what_page) {
     } else if (what_page == 'Hyper') {
         return [[0,50, 50], [0, 50, 40], [0, 50, 30]]
     } else if (what_page == 'NegBinom') {
-        return [[1,30, 1], [0, 1, 0.5]]
+        return [[1,15, 1], [0, 1, 0.5]]
     } else if (what_page == 'Gamma') {
         return [[0.01, 30, 1], [0.01, 10, 1]]
     } else if (what_page == 'Beta') {
         return [[0.01, 10, 2], [0.01, 10, 2]]
-    }  
+    }  else if (what_page == 'Chi') {
+        return [[1, 10, 1]]
+    }
 }
 
 function range(what_page) {
@@ -471,12 +386,14 @@ function range(what_page) {
     } else if (what_page == 'Hyper') {
         return [[0, 50], [0,0.5]]
     } else if (what_page == 'NegBinom') {
-        return [[1,60], [0,0.5]]
+        return [[1,40], [0,0.5]]
     } else if (what_page == 'Gamma') {
         return [[0.01,10], [0,2]]
     } else if (what_page == 'Beta') {
         return [[0,1], [0,4]]
-    }  
+    } else if (what_page == 'Chi') {
+        return [[0.01, 20], [0,0.5]]
+    }
 }
 
 function get_step(what_page) {
@@ -502,7 +419,9 @@ function get_step(what_page) {
         return false
     } else if (what_page == 'Beta') {
         return false
-    }  
+    } else if (what_page == 'Chi') {
+        return false
+    } 
 }
 
 function discrete(what_page) {
@@ -517,6 +436,8 @@ function discrete(what_page) {
     } else if (what_page == 'Gamma') {
         return false
     } else if (what_page == 'Beta') {
+        return false
+    } else if (what_page == 'Chi') {
         return false
     } else {
         return true
@@ -685,6 +606,10 @@ function change_page(what_page, page_content, symb, range_par, range) {
         two_thumb3.noUiSlider.updateOptions({
             step: 1
         })
+    } else if (what_page == 'Chi') {
+        two_thumb1.noUiSlider.updateOptions({
+            step: 1
+        })
     } else {
         two_thumb1.noUiSlider.updateOptions({
             step: 0.01
@@ -760,17 +685,6 @@ function change_page(what_page, page_content, symb, range_par, range) {
     list_of_symb = symb
     hide_or_show(symb)
 
-    let MV = mean_var_calc(list_of_par, page)
-    if (typeof(MV[0]) == 'number') {
-        MV[0] = MV[0].toFixed(2)
-    }
-    if (typeof(MV[1]) == 'number') {
-        MV[1] = MV[1].toFixed(2)
-    }
-
-    Expect.innerHTML = 'E[X] = ' + MV[0]
-    Var.innerHTML = 'Var(X) = ' + MV[1]
-
     arr = []
     for (let i=range[0][0]; i<=range[0][1]; i += interval) {
         arr.push(Math.round((1/interval)*i) / (1/interval));
@@ -821,4 +735,7 @@ document.getElementById('Gamma').addEventListener('click', function changt_to_Ga
 });
 document.getElementById('Beta').addEventListener('click', function changt_to_Beta() {
     animate_change_page('Beta')
+});
+document.getElementById('Chi').addEventListener('click', function changt_to_Chi() {
+    animate_change_page('Chi')
 });
