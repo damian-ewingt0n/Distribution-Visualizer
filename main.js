@@ -132,8 +132,10 @@ let DistChart = new Chart (mychart, {
                         }
                     }
                 }
-            }]
-            
+            }],
+        },
+        tooltips: {
+            enabled: false
         },
         maintainAspectRatio: false,
         animation: false,
@@ -143,7 +145,7 @@ let DistChart = new Chart (mychart, {
             }
         },
         legend: false
-    }
+        },
     
 })
 
